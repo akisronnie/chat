@@ -1,0 +1,63 @@
+body {background-color: rgb(43, 43, 43); }
+.helloMsg { width: 100%;
+  text-align: center;
+    position: fixed;
+    font-size: 4vw;;
+    font-weight: normal;
+    cursor: pointer;
+    text-shadow: 0 0 20px transparent;
+    color: transparent;
+    animation: shadows 4s infinite ease-in; z-index:50;
+    }
+@keyframes shadows {
+    10% {
+      text-shadow: 0 0px 1px hsl(98, 100%, 28%);
+    }
+    60% {
+      text-shadow: 0 0px 1px rgb(1, 175, 16);
+    }
+    90% {
+      text-shadow: 0 30px 40px transparent;
+    }  
+  } 
+.bottom {text-align: center; background-color: black; color: aliceblue;font-size: 20px;}
+.boxx{text-align: justify;
+    font-size: 22px; 
+    color:rgb(167, 190, 161); 
+    border-radius: 20px;
+     padding: 25px;
+     margin-left: 32px;
+      margin-right: 32px;
+    background-color: rgb(88, 86, 86);
+    box-shadow: 0 0 50px #27435f; 
+    padding: 30px;
+    background-size: 100% auto;}
+aside {
+    height: auto;
+    position:relative;
+    margin-left: 10%;
+    margin-right: 10%;
+    top: 10px;
+    left: 0;
+    border-radius: 10px;
+   
+    display: block;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+aside h2{
+    font-weight: 300;
+    color: #afafaf;
+}
+
+.slide-transition {
+    transition: all 1s ;
+}
+
+.slide-enter, .slide-leave {
+    left:  -100%; 
+}
+
+

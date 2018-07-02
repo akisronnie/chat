@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+    <title>Chat</title>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="public/css/chat.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.13/dist/semantic.min.js"></script>
+</head>
+<body>
+      <div class="layer" id="chat_result">
+    <ul id="messages"></ul>
+    </div>
+    <div style="text-align:center; color: palegreen; font-size: 20px;">Your name:  <%= data.username %> </div>
+    <div id="clock" style="text-align:center; color: palegreen; font-size: 20px;"></div>
+<form action="">
+    <input id="m" autocomplete="off" autofocus /><button>Send</button>
+</form>
+
+<script>
+   $(function () {
+    var socket = io();
+    $('form').submit(function(){
+        socket.emit('chat message', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+    socket.on('chat message', function(msg){
+       
+        $('#messages').append($('<li>').text("<%=  data.username %> "+": "+msg));
+            var block = document.getElementById("chat_result");
+        block.scrollTop = block.scrollHeight;
+    });
+});
+</script>
+<script src="/public/js/chat.js"></script>
+</body>
+</html>
