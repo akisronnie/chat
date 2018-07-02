@@ -11,8 +11,17 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Alex Kiss",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akisronnie/chat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/akisronnie/chat/issues"
+  },
+  "homepage": "https://github.com/akisronnie/chat#readme"
 }
