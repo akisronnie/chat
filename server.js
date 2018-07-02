@@ -11,12 +11,13 @@ app.post('/chat',urlencodedParser, function(req, res){
     if (!req.body) return res.sendStatus(400);
      res.render('chat', {data: req.body});
 });
-app.get('/', function(req, res){
-    res.render('login');
-});
 app.get('/index', function(req, res){
     res.render('login');
 });
+app.get('/', function(req, res){
+    res.render('login');
+});
+
 
 io.on('connection', function(socket){
     socket.on('chat message', function(msg){
