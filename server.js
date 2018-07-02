@@ -14,6 +14,10 @@ app.post('/chat',urlencodedParser, function(req, res){
 app.get('/', function(req, res){
     res.render('login');
 });
+app.get('/index', function(req, res){
+    res.render('login');
+});
+
 io.on('connection', function(socket){
     socket.on('chat message', function(msg){
         io.emit('chat message', msg);
