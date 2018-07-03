@@ -15,13 +15,13 @@
 <div id="app3">
 <br><br>
 <aside id="box" v-show="show"  transition="slide" class="boxx" style="background-image: url(http://aslania.com/wp-content/uploads/2018/03/black-background-wallpaper-4.jpg)"> 
-    <div id="clock" style="text-align:center; color: palegreen; font-size: 20px;"></div>
+    <div id="clock" style="text-align:center; color: palegreen; font-size: 20px;">00:00:00</div>
     <form method="post" action="/chat">
         <div class="form-group">
           <label for="app1">Please enter your name!</label>
-          <input type="username" name="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" v-model="hellow" id="app1">
+          <input type="username" name="username" class="form-control" aria-describedby="emailHelp" placeholder="Enter a name" v-model="hellow" id="app1">
         </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Enter the chat</button>
       </form>
 </aside>
 <br>
