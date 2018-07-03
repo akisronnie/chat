@@ -29,6 +29,8 @@
       });
       socket.on('chat message', function(msg,nickname){
       $('#messages').append($('<li>').text(nickname +' : '+msg));
+          var block = document.getElementById("chat_result");
+          block.scrollTop = block.scrollHeight;
       });
     });
     </script>
