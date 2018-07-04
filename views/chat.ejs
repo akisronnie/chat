@@ -14,23 +14,44 @@
     </div>
     <div style="text-align:center; color: palegreen; font-size: 20px;">Your name:  <span id='user'><%= data.username %> </span></div>
     <div id="clock" style="text-align:center; color: palegreen; font-size: 20px;"></div>
+    <!-- <div id ='userlist'>  <%= data.userlist %> -->
+    <span style="font-size: 20px; color: red">В ЧАТЕ:</span><span id ='userlist' style="font-size: 20px; color: aliceblue;">    </span>
 <form action="" id="chatform">
     <input id="m" autocomplete="off" autofocus /><button id="formbutton">Send</button>
 </form>
 <script>
     $(function () {
       d = document.getElementById("user");
+      g = document.getElementById("userlist");
     var username = d.innerHTML;
+    var userlisten=[];
+    g.innerHTML=userlisten;
       var socket = io();
       $('form').submit(function(){
       socket.emit('chat message', $('#m').val(),username);
       $('#m').val('');
       return false;
       });
-      socket.on('chat message', function(msg,nickname){
+
+socket.on('chatlog', function(chatlog){
+for(i=0; i<chatlog.length; i++ ){
+      $('#messages').append($('<li>').text(chatlog[i]));
+          var block = document.getElementById("chat_result");
+          block.scrollTop = block.scrollHeight;}
+         
+
+      });
+
+
+
+
+      socket.on('chat message', function(msg,nickname, userlist){
       $('#messages').append($('<li>').text(nickname +' : '+msg));
           var block = document.getElementById("chat_result");
           block.scrollTop = block.scrollHeight;
+          userlisten=userlist;
+          g.innerHTML=userlisten;
+
       });
     });
     </script>
