@@ -15,7 +15,7 @@ var chatlog = [];
 app.post('/chat',urlencodedParser, function(req, res){
     if (!req.body) return res.sendStatus(400);
 		username = req.body.username;    
-		req.body.userlist=userlist;
+	
     res.render('chat', {data: req.body});
 });
 
@@ -33,34 +33,38 @@ app.get('/chat', function(req, res){
 	else {res.render('chat');}
 });
 
-io.on('connection', function(socket){
+function EnterChat() {
 	console.log(username+' connected');
 	io.emit('chatlog', chatlog);
-	
 	userlist.push(' '+username);
 	console.log(userlist);
-	
-	io.emit('chat message', 'Вошел в чат', username,userlist);
+	io.emit('chat message', 'Вошел в чат ' + username, userlist);
 	chatlog.push(username + ':Вошел в чат');
-	socket.on('disconnect', function(){
-		console.log(username+' disconnected');
+}
+function LeaveChat() {
+	console.log(username+' disconnected');
 		for (i=0;i<userlist.length; i++){
 			if (userlist[i]==(' '+username)) { userlist.splice(i, 1)}
-		}
-		io.emit('chat message', 'Вышел с чата', username, userlist);
-		chatlog.push(username + ':Вышкл с чата');
+		  	}
+		io.emit('chat message', 'Вышел с чата ' + username, userlist);
+		chatlog.push(username + ':Вышел с чата');
+	
+}
+
+function chatMsg(msg, userlist) {
+	io.emit('chat message', msg, userlist);
+	chatlog.push(msg);
+	if (chatlog.length>20){chatlog.splice(1,1)};
+}
+
+io.on('connection', function(socket){
+		EnterChat();
+	socket.on('disconnect', function(){
+		LeaveChat();
 	});
-
-	socket.on('chat message', function(msg, usname){
-		username = usname;
-
-	  });
 	socket.on('chat message', function(msg){
-
-		io.emit('chat message', msg, username, userlist);
-		chatlog.push(username + ':'+ msg);
-		if (chatlog.length>20){chatlog.splice(1,1)};
-	  });
+		chatMsg(msg,userlist);
   });
-http.listen(process.env.PORT || 3000, function () {console.log('Server Start');
-});
+})
+
+http.listen(process.env.PORT || 3000, function () {console.log('Server Start')});

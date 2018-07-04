@@ -28,10 +28,13 @@
     g.innerHTML=userlisten;
       var socket = io();
       $('form').submit(function(){
-      socket.emit('chat message', $('#m').val(),username);
+      socket.emit('chat message', (username +': ' +$('#m').val()));
       $('#m').val('');
       return false;
       });
+
+
+
 
 socket.on('chatlog', function(chatlog){
 for(i=0; i<chatlog.length; i++ ){
@@ -45,8 +48,9 @@ for(i=0; i<chatlog.length; i++ ){
 
 
 
-      socket.on('chat message', function(msg,nickname, userlist){
-      $('#messages').append($('<li>').text(nickname +' : '+msg));
+      socket.on('chat message', 
+      function(msg, userlist){
+      $('#messages').append($('<li>').text(msg));
           var block = document.getElementById("chat_result");
           block.scrollTop = block.scrollHeight;
           userlisten=userlist;
